@@ -11,9 +11,17 @@ Functions:
 - `multi_causality_est(xx, np_step)`
 - `normalized_causality_est(..., tau_ci_method=None|"analytic"|"bootstrap")`
 - `normalized_multi_causality_est(..., tau_ci_method=None|"analytic"|"bootstrap")`
+- `all_causality_est(xx, np_step, ...)` (all directed pairs)
+- `normalized_all_causality_est(xx, np_step, ...)` (all directed pairs + tau)
+- `z_norm_cal(tau_mat, h_noise)` (target-wise `Z` post-processing)
 
 `tau_ci_method="analytic"` uses delta-method approximation.
 `tau_ci_method="bootstrap"` uses moving-block bootstrap percentile CI.
+
+Batch matrix orientation in `all_*` APIs:
+- source is row index `j`
+- target is column index `i`
+- entry `[j, i]` means `j -> i`
 
 ## What `kal_lkif.py` is for
 `MvLKIF/core/kal_lkif.py` is the time-varying Kalman LKIF engine.
@@ -23,6 +31,13 @@ Functions:
 - `kal_lkif(MAlen, NN, MA, np_step, *series, return_tau=True, tau_ci_method=None|"analytic"|"bootstrap")`
 - `normalized_kal_lkif(...)`
 - `KalLKIF(...)` (directional core routine)
+- `kal_lkif_target_all(...)` (fixed target, all sources)
+- `kal_lkif_all(...)` (all directed pairs as `(m, m, t)` arrays)
+
+`kal_lkif_all` matrix orientation:
+- source is row `j`
+- target is column `i`
+- entry `[j, i, t]` is time-varying `j -> i`
 
 ## Calling Flow
 ### Static path

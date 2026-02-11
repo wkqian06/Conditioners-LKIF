@@ -8,13 +8,19 @@ Siddique et al., 2026 (submitted to Earth System Dynamics)
 
 Repository Structure
 
-Multi_LKIF: MATLAB functions and scripts for computing multivariate LKIF, including time-varying estimation with Kalman filter. All functions used for calculating information flow (IF), are included here.
+- `Multi_LKIF/`: MATLAB functions and scripts for multivariate LKIF, including time-varying estimation with Kalman filter.
+- `MvLKIF/`: refactored Python package for static and time-varying LKIF APIs.
+- `ANOVA.ipynb`: regime-based ANOVA of ΔIF.
+- `Toy Model.ipynb`: original synthetic VAR toy-model notebook.
+- `Toy Model_python.ipynb`: updated Python toy-model workflow using the new `MvLKIF` package.
 
-ANOVA.ipynb: Python notebook for running the regime-based ANOVA of ΔIF, quantifying drivers of divergence between bivariate and multivariate causal estimates.
+Key Python API entry points:
+- Static single-direction: `causality_est`, `multi_causality_est`, `normalized_*`.
+- Static all-directions: `all_causality_est`, `normalized_all_causality_est`.
+- Time-varying single-direction: `kal_lkif`, `normalized_kal_lkif`.
+- Time-varying all-directions: `kal_lkif_target_all`, `kal_lkif_all`.
 
-Toy Model.ipynb: Demonstrates theoretical synthetic VAR model experiments under hidden confounding (Appendix A of paper).
-
-rIF_deltaIF.ipynb: Script for calculating |rIF| and |ΔIF|, visualized via split-triangle heatmaps.
-
-Conditioner_Based_Couplings_Analysis.ipynb: Computes the Mediator Dominance Index (MDI), Moderation Gain (MG), Confounding Pressure (CP), and Convergence Rate (CR).
-
+Batch output orientation:
+- row = source `j`
+- column = target `i`
+- entry `[j, i]` means `j -> i`

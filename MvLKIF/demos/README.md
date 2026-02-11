@@ -11,7 +11,7 @@ This demo reproduces the **application calling patterns** in `Multi_LKIF/` for t
 - `Multi_LKIF/MultiLK_with_negatives.m`
 
 ## Python Demo Script
-- `lkif/demos/mvlkif_applications_demo.py`
+- `MvLKIF/demos/mvlkif_applications_demo.py`
 
 The script preserves each application's:
 - parameter sets (`MAlen`, `NN`, `MA`, `np`)
@@ -21,13 +21,13 @@ The script preserves each application's:
 ## Run Demo
 
 ```bash
-conda run -n NASAOpenscapes python -m lkif.demos.mvlkif_applications_demo
+conda run -n NASAOpenscapes python -m MvLKIF.demos.mvlkif_applications_demo
 ```
 
 Run only selected applications or larger settings:
 
 ```bash
-conda run -n NASAOpenscapes python -m lkif.demos.mvlkif_applications_demo --apps toy1 huabei --length 1200 --realizations 8
+conda run -n NASAOpenscapes python -m MvLKIF.demos.mvlkif_applications_demo --apps toy1 huabei --length 1200 --realizations 8
 ```
 
 ## Note on Data

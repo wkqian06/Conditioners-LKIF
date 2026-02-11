@@ -74,17 +74,34 @@ Both bivariate and multivariate normalized APIs support:
 
 CI interfaces are consistent across dimensions; numerical values differ because `Z` and fitted coefficients differ.
 
-## 5) When should bivariate and multivariate match?
+## 5) Batch APIs and matrix orientation
+The package now also exposes batch APIs:
+- Static all-directions: `all_causality_est`, `normalized_all_causality_est`
+- Time-varying all-directions: `kal_lkif_target_all`, `kal_lkif_all`
+
+For all batch matrix outputs, orientation is:
+- row = source `j`
+- column = target `i`
+- entry `[j, i]` (or `[j, i, t]`) means `j -> i`
+
+In `normalized_all_causality_est`, `tau` diagonal is filled as `tau_self = H_self / Z`.
+`h_noise` is returned as a target-wise vector.
+
+`z_norm_cal(tau_mat, h_noise)` computes target-wise `Z` from:
+- `Z_i = sum_j |tau_{j->i}| + |h_noise_i|`
+- the summation is over column `i`.
+
+## 6) When should bivariate and multivariate match?
 They should match exactly (up to floating-point roundoff) if multivariate input contains only two columns `[x1, x2]`.
 
 They generally differ when extra variables are included, because multivariate estimates conditional transfer and uses broader normalization in `tau`.
 
-## 6) Practical guidance
+## 7) Practical guidance
 - Use bivariate when you only trust/observe a pair and want pairwise transfer.
 - Use multivariate when confounders/conditioners are available and conditional effects matter.
 - Compare both when diagnosing suppression/confounding.
 
-## 7) Code locations
+## 8) Code locations
 - Unified static core: `MvLKIF/core/causality.py` (`_estimate_transfer`)
 - Moving-window switch: `MvLKIF/core/moving_lkif.py`
-- Time-varying Kalman core: `MvLKIF/core/kal_lkif.py` (`KalLKIF`, `kal_lkif`)
+- Time-varying Kalman core: `MvLKIF/core/kal_lkif.py` (`KalLKIF`, `kal_lkif`, `kal_lkif_target_all`, `kal_lkif_all`)
